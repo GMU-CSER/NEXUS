@@ -1,0 +1,60 @@
+!> \file Process{{ config.class_name }}Interface_Mod.F90
+!! \brief Main interface for {{ config.name }} process
+!!
+module Process{{ config.class_name }}Interface_Mod
+   use precision_mod, only: fp
+   use error_mod
+   use VirtualColumn_Mod, only: VirtualColumnType
+   use ProcessInterface_Mod, only: ColumnProcessInterface, StateManagerType
+
+   implicit none
+   private
+
+   public :: {{ config.class_name }}Process
+
+   type, extends(ColumnProcessInterface) :: {{ config.class_name }}Process
+      ! Process-specific configuration
+   contains
+      procedure :: init => process_{{ config.name }}_init
+      procedure :: run => process_{{ config.name }}_run
+      procedure :: finalize => process_{{ config.name }}_finalize
+      procedure :: run_column => process_{{ config.name }}_run_column
+   end type {{ config.class_name }}Process
+
+contains
+
+   subroutine process_{{ config.name }}_init(this, container, rc)
+      class({{ config.class_name }}Process), intent(inout) :: this
+      type(StateManagerType), intent(inout) :: container
+      integer, intent(out) :: rc
+      this%name = '{{ config.name }}'
+      this%version = '{{ config.version }}'
+      this%description = '{{ config.description }}'
+      this%is_initialized = .true.
+      this%is_active = .true.
+      rc = CC_SUCCESS
+   end subroutine process_{{ config.name }}_init
+
+   subroutine process_{{ config.name }}_run(this, container, rc)
+      class({{ config.class_name }}Process), intent(inout) :: this
+      type(StateManagerType), intent(inout) :: container
+      integer, intent(out) :: rc
+      rc = CC_SUCCESS
+   end subroutine process_{{ config.name }}_run
+
+   subroutine process_{{ config.name }}_finalize(this, rc)
+      class({{ config.class_name }}Process), intent(inout) :: this
+      integer, intent(out) :: rc
+      rc = CC_SUCCESS
+   end subroutine process_{{ config.name }}_finalize
+
+   subroutine process_{{ config.name }}_run_column(this, column, container, rc)
+      class({{ config.class_name }}Process), intent(inout) :: this
+      type(VirtualColumnType), intent(inout) :: column
+      type(StateManagerType), intent(inout) :: container
+      integer, intent(out) :: rc
+      rc = CC_SUCCESS
+      ! Implement process logic here
+   end subroutine process_{{ config.name }}_run_column
+
+end module Process{{ config.class_name }}Interface_Mod

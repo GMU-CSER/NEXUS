@@ -1,0 +1,12 @@
+# CMakeLists.txt for {{ config.name }} process
+set(
+  {{ config.name }}_srcs
+  Process{{ config.class_name }}Interface_Mod.F90
+  {{ config.class_name }}Common_Mod.F90
+  {{ config.class_name }}ProcessCreator_Mod.F90
+)
+
+add_library(nexus_toolbox_{{ config.name }} ${{"{"}}{{ config.name }}_srcs{{"}"}})
+target_link_libraries(nexus_toolbox_{{ config.name }} PUBLIC nexus_toolbox_core)
+
+add_subdirectory(schemes)

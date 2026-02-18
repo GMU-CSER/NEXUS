@@ -1,0 +1,4 @@
+# CMakeLists.txt for {{ config.name }} tests
+add_executable(test_{{ config.name }}_unit unit/test_{{ config.name }}_unit.F90)
+target_link_libraries(test_{{ config.name }}_unit PUBLIC nexus_toolbox_{{ config.name }} nexus_toolbox_{{ config.name }}_schemes)
+add_test(NAME test_{{ config.name }}_unit COMMAND test_{{ config.name }}_unit)

@@ -1,0 +1,19 @@
+process:
+  name: "megan_biogenics"
+  class_name: "MeganBiogenics"
+  description: "MEGANv2.1 biogenic emissions scheme"
+  author: "NEXUS Team"
+  version: "1.0.0"
+
+variables:
+  - name: "temperature"
+    units: "K"
+    description: "Surface air temperature"
+  - name: "radiation"
+    units: "W/m2"
+    description: "Surface shortwave radiation"
+
+schemes:
+  - name: "MEGANv2.1"
+    class_name: "MEGANv21"
+    description: "Standard MEGANv2.1 implementation"
