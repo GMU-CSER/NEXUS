@@ -1,0 +1,3 @@
+add_executable(test_megan_mod test_megan_mod.F90)
+target_link_libraries(test_megan_mod PUBLIC nexus_toolbox_core nexus_toolbox_megan)
+add_test(NAME test_megan_mod COMMAND test_megan_mod)

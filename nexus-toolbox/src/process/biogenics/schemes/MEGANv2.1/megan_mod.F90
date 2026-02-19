@@ -91,8 +91,8 @@ contains
          pac_daily = 400.0_fp * WM2_TO_UMOLM2S
          sinbeta = 0.866_fp ! Fixed 60 deg for example
          phi = (swgdn * WM2_TO_UMOLM2S) / (sinbeta * 3000.0_fp)
-         bbb = 1.0_hp + 0.0005_hp * (pac_daily - 400.0_hp)
-         aaa = (2.46_hp * bbb * phi) - (0.9_hp * phi**2)
+         bbb = 1.0_fp + 0.0005_fp * (pac_daily - 400.0_fp)
+         aaa = (2.46_fp * bbb * phi) - (0.9_fp * phi**2)
          gamma_P = sinbeta * aaa
       else
          gamma_P = 0.0_fp
