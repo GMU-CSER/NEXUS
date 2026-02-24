@@ -7,6 +7,7 @@ module nexus_toolbox_api_mod
    use ProcessInterface_Mod, only: ProcessInterface, ColumnProcessInterface, StateManagerType
    use megan_mod, only: MeganProcess
    use canopy_bioemi_wrapper_mod, only: CanopyBioEmiProcess
+   use point_source_mod, only: PointSourceBatchType
 
    implicit none
    private
@@ -17,6 +18,7 @@ module nexus_toolbox_api_mod
 
    type(MeganProcess), save, target :: megan
    type(CanopyBioEmiProcess), save, target :: canopy_bioemi
+   type(PointSourceBatchType), save, target :: point_sources
 
 contains
 

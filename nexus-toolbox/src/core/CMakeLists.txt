@@ -1,5 +1,6 @@
 set(core_srcs
   precision_mod.F90
+  constants.F90
   error_mod.F90
   VirtualColumn_Mod.F90
   ColumnInterface_Mod.F90

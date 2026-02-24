@@ -1,4 +1,6 @@
 set(canopy_bioemi_srcs
+  canopy_app_stubs.F90
+  canopy_bioemi_mod.F90
   canopy_bioemi_wrapper_mod.F90
 )
 add_library(nexus_toolbox_canopy_bioemi ${canopy_bioemi_srcs})

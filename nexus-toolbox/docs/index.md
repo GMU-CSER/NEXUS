@@ -22,3 +22,4 @@ The Nexus Toolbox is a modular infrastructure for atmospheric chemistry process-
 
 - [Testing Standards](testing_standards.md)
 - [MEGANv2.1 Implementation Details](processes/megan.md)
+- [Emissions Point Sources and Plume Rise](processes/emissions.md)

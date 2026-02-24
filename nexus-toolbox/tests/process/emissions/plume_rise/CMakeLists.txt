@@ -1,0 +1,3 @@
+add_executable(test_briggs_plume_rise test_briggs_plume_rise.F90)
+target_link_libraries(test_briggs_plume_rise PUBLIC nexus_toolbox_core nexus_toolbox_plume_rise)
+add_test(NAME test_briggs_plume_rise COMMAND test_briggs_plume_rise)
