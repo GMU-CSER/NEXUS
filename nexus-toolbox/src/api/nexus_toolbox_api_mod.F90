@@ -6,6 +6,7 @@ module nexus_toolbox_api_mod
    use error_mod
    use ProcessInterface_Mod, only: ProcessInterface, ColumnProcessInterface, StateManagerType
    use megan_mod, only: MeganProcess
+   use canopy_bioemi_wrapper_mod, only: CanopyBioEmiProcess
 
    implicit none
    private
@@ -15,6 +16,7 @@ module nexus_toolbox_api_mod
    public :: nexus_toolbox_finalize
 
    type(MeganProcess), save, target :: megan
+   type(CanopyBioEmiProcess), save, target :: canopy_bioemi
 
 contains
 
@@ -24,6 +26,9 @@ contains
 
       print *, "nexus-toolbox: Initializing..."
       call megan%init(container, rc)
+      if (rc /= CC_SUCCESS) return
+
+      call canopy_bioemi%init(container, rc)
       if (rc /= CC_SUCCESS) return
 
       print *, "nexus-toolbox: Initialized."
@@ -37,6 +42,10 @@ contains
       if (megan%is_active) then
          call megan%run(container, rc)
       endif
+
+      if (canopy_bioemi%is_active) then
+         call canopy_bioemi%run(container, rc)
+      endif
    end subroutine nexus_toolbox_run
 
    subroutine nexus_toolbox_finalize(rc)
@@ -44,6 +53,7 @@ contains
 
       print *, "nexus-toolbox: Finalizing..."
       call megan%finalize(rc)
+      call canopy_bioemi%finalize(rc)
       print *, "nexus-toolbox: Finalized."
    end subroutine nexus_toolbox_finalize
 

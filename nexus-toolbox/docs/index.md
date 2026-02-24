@@ -8,6 +8,7 @@ The Nexus Toolbox is a modular infrastructure for atmospheric chemistry process-
 - **Column Virtualization**: Efficient processing of individual atmospheric columns.
 - **Process Generator**: Automated generation of process stubs and boilerplate code.
 - **UFS Integration**: Pre-built NUOPC/ESMF hooks for seamless coupling.
+- **Subcanopy Light Interface**: Easy integration with external models like `canopy-app`.
 
 ## Directory Structure
 
