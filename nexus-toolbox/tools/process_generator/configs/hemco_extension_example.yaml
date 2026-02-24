@@ -1,0 +1,16 @@
+process:
+  name: "Custom"
+  class_name: "Custom"
+  description: "Customizable HEMCO emission extension"
+  author: "NEXUS Team"
+  version: "1.0.0"
+  process_type: "hemco_extension"
+
+species:
+  - "OCWIND"
+  - "ICESRC"
+
+schemes:
+  - name: "CustomScheme"
+    class_name: "CustomScheme"
+    description: "Standard custom scheme"

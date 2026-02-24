@@ -3,6 +3,7 @@
 Nexus Process Generator Tool
 
 Adapted from CATChem Process Generator.
+Includes support for HEMCO extensions.
 """
 import argparse
 import logging
@@ -33,6 +34,7 @@ class ProcessConfig:
     description: str
     author: str
     version: str = "1.0.0"
+    process_type: str = "nexus_process" # nexus_process or hemco_extension
     species: List[str] = field(default_factory=list)
     schemes: List[SchemeConfig] = field(default_factory=list)
     default_scheme: str = ""
@@ -49,6 +51,13 @@ class ProcessGenerator:
             trim_blocks=True,
             lstrip_blocks=True
         )
+        # Add custom filters
+        self.env.filters['pascal_case'] = self._pascal_case
+
+    @staticmethod
+    def _pascal_case(s: str) -> str:
+        """Convert string to PascalCase."""
+        return ''.join(word.capitalize() for word in s.replace('_', ' ').replace('-', ' ').split())
 
     def load_config(self, config_path: Union[str, Path]) -> ProcessConfig:
         with open(config_path, 'r') as f:
@@ -70,6 +79,12 @@ class ProcessGenerator:
         else:
             base_dir = Path(".")
 
+        if config.process_type == "hemco_extension":
+            self._generate_hemco_extension(config, base_dir)
+        else:
+            self._generate_nexus_process(config, base_dir)
+
+    def _generate_nexus_process(self, config: ProcessConfig, base_dir: Path) -> None:
         proc_dir = base_dir / config.name
         schemes_dir = proc_dir / "schemes"
         unit_test_dir = proc_dir / "tests" / "unit"
@@ -112,7 +127,20 @@ class ProcessGenerator:
         with open(unit_test_dir / f"test_{config.name}_unit.F90", 'w') as f:
             f.write(content)
 
-        logger.info(f"Process {config.name} generated in {proc_dir}")
+        logger.info(f"Nexus process {config.name} generated in {proc_dir}")
+
+    def _generate_hemco_extension(self, config: ProcessConfig, base_dir: Path) -> None:
+        ext_dir = base_dir / f"hcox_{config.name.lower()}"
+        ext_dir.mkdir(parents=True, exist_ok=True)
+
+        template = self.env.get_template("hemco_extension.F90.j2")
+        content = template.render(config=config, timestamp=datetime.now().isoformat())
+
+        out_name = f"hcox_{config.name.lower()}_mod.F90"
+        with open(ext_dir / out_name, 'w') as f:
+            f.write(content)
+
+        logger.info(f"HEMCO extension {config.name} generated in {ext_dir}")
 
 def main():
     parser = argparse.ArgumentParser(description="Nexus Process Generator")
