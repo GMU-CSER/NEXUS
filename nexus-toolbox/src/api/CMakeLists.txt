@@ -1,6 +1,5 @@
 set(api_srcs
   nexus_toolbox_api_mod.F90
-  nexus_toolbox_cap.F90
   subcanopy_interface_mod.F90
 )
 add_library(nexus_toolbox_api ${api_srcs})
