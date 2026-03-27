@@ -1,0 +1,40 @@
+!> \file test_{{ config.name }}_unit.F90
+!! \brief Unit test for {{ config.name }} process
+!!
+program test_{{ config.name }}_unit
+   use precision_mod
+   use error_mod
+   use VirtualColumn_Mod
+   use ProcessInterface_Mod
+   use Process{{ config.class_name }}Interface_Mod
+
+   implicit none
+
+   type({{ config.class_name }}Process) :: process
+   type(VirtualColumnType) :: column
+   type(StateManagerType) :: container
+   integer :: rc
+
+   print *, "Starting unit test for {{ config.name }}..."
+
+   ! Initialize process
+   call process%init(container, rc)
+   if (rc /= CC_SUCCESS) then
+      print *, "FAILED: process initialization"
+      stop 1
+   endif
+
+   ! Initialize column
+   call column%init(nlev=1, nspec_chem=1, nspec_emis=1, grid_i=1, grid_j=1, &
+                   lat=0.0_fp, lon=0.0_fp, area=1.0_fp, rc=rc)
+
+   ! Run process
+   call process%run_column(column, container, rc)
+   if (rc /= CC_SUCCESS) then
+      print *, "FAILED: process execution"
+      stop 1
+   endif
+
+   print *, "Unit test PASSED"
+
+end program test_{{ config.name }}_unit

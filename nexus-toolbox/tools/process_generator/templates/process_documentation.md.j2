@@ -1,0 +1,17 @@
+# Process: {{ config.name }}
+
+{{ config.description }}
+
+## Configuration
+
+- Class Name: {{ config.class_name }}
+- Author: {{ config.author }}
+- Version: {{ config.version }}
+
+## Schemes
+
+{% for scheme in config.schemes %}
+### {{ scheme.name }}
+
+{{ scheme.description }}
+{% endfor %}

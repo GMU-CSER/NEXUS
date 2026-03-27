@@ -1,0 +1,2 @@
+add_subdirectory(point_sources)
+add_subdirectory(plume_rise)

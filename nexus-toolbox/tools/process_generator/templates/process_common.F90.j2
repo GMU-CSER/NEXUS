@@ -1,0 +1,18 @@
+!> \file {{ config.class_name }}Common_Mod.F90
+!! \brief Common types and utilities for {{ config.name }} process
+!!
+module {{ config.class_name }}Common_Mod
+   use precision_mod, only: fp
+
+   implicit none
+   private
+
+   public :: {{ config.class_name }}ConfigType
+
+   type :: {{ config.class_name }}ConfigType
+      character(len=64) :: scheme_name = ''
+      integer :: n_species = {{ config.species|length }}
+      ! Add other config fields here
+   end type {{ config.class_name }}ConfigType
+
+end module {{ config.class_name }}Common_Mod

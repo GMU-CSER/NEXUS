@@ -1,0 +1,23 @@
+!> \file {{ config.class_name }}Scheme_{{ scheme.class_name }}_Mod.F90
+!! \brief Implementation of {{ scheme.name }} scheme for {{ config.name }} process
+!!
+module {{ config.class_name }}Scheme_{{ scheme.class_name }}_Mod
+   use precision_mod, only: fp
+   use error_mod
+   use VirtualColumn_Mod, only: VirtualColumnType
+
+   implicit none
+   private
+
+   public :: {{ scheme.class_name }}_run
+
+contains
+
+   subroutine {{ scheme.class_name }}_run(column, rc)
+      type(VirtualColumnType), intent(inout) :: column
+      integer, intent(out) :: rc
+      rc = CC_SUCCESS
+      ! Implement scheme logic here
+   end subroutine {{ scheme.class_name }}_run
+
+end module {{ config.class_name }}Scheme_{{ scheme.class_name }}_Mod

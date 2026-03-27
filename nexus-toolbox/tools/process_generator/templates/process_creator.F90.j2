@@ -1,0 +1,25 @@
+!> \file {{ config.class_name }}ProcessCreator_Mod.F90
+!! \brief Factory for creating {{ config.name }} process instances
+!!
+module {{ config.class_name }}ProcessCreator_Mod
+   use precision_mod
+   use error_mod
+   use ProcessInterface_Mod, only: ProcessInterface
+   use Process{{ config.class_name }}Interface_Mod
+
+   implicit none
+   private
+
+   public :: create_{{ config.name }}_process
+
+contains
+
+   subroutine create_{{ config.name }}_process(process_ptr, rc)
+      class(ProcessInterface), pointer, intent(out) :: process_ptr
+      integer, intent(out) :: rc
+
+      allocate({{ config.class_name }}Process :: process_ptr)
+      rc = CC_SUCCESS
+   end subroutine create_{{ config.name }}_process
+
+end module {{ config.class_name }}ProcessCreator_Mod

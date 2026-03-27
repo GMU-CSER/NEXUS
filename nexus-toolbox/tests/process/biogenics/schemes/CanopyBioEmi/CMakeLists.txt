@@ -1,0 +1,3 @@
+add_executable(test_canopy_bioemi test_canopy_bioemi.F90)
+target_link_libraries(test_canopy_bioemi PUBLIC nexus_toolbox_core nexus_toolbox_canopy_bioemi)
+add_test(NAME test_canopy_bioemi COMMAND test_canopy_bioemi)
